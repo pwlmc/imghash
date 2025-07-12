@@ -24,7 +24,7 @@
     "url": "https://github.com/pwlmc/imghash/issues"
   },
   "engines": {
-    "node": ">=8.x.x"
+    "node": ">=20"
   },
   "homepage": "https://github.com/pwlmc/imghash#readme",
   "devDependencies": {
