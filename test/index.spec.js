@@ -1,6 +1,5 @@
 const fs = require("fs");
 const leven = require("leven");
-
 const imghash = require("../index");
 
 describe("imghash", () => {
