@@ -76,7 +76,7 @@ describe("imghash", () => {
 
   it("should support validate output format", () => {
     return expect(
-      imghash.hash(__dirname + "/files/absolut1", null, "foo")
+      imghash.hash(__dirname + "/files/absolut1", null, "foo"),
     ).rejects.toEqual(new Error("Unsupported format: foo"));
   });
 
@@ -88,21 +88,21 @@ describe("imghash", () => {
 
   it("should validate bit lengths", function () {
     return expect(
-      imghash.hash(__dirname + "/files/absolut1", 10)
+      imghash.hash(__dirname + "/files/absolut1", 10),
     ).rejects.toEqual(new Error("Invalid bit-length: 10"));
   });
 
   it("should expose hexToBinary", () => {
     expect(imghash.hexToBinary("83C3D381C38985A5")).toBe(
-      "1000001111000011110100111000000111000011100010011000010110100101"
+      "1000001111000011110100111000000111000011100010011000010110100101",
     );
   });
 
   it("should expose binaryToHex", () => {
     expect(
       imghash.binaryToHex(
-        "1000001111000011110100111000000111000011100010011000010110100101"
-      )
+        "1000001111000011110100111000000111000011100010011000010110100101",
+      ),
     ).toBe("83c3d381c38985a5");
   });
 
