@@ -29,7 +29,7 @@
   "homepage": "https://github.com/pwlmc/imghash#readme",
   "devDependencies": {
     "eslint": "^8.32.0",
-    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-prettier": "^10.1.8",
     "jest": "^29.4.0",
     "leven": "^3.1.0",
     "prettier": "^3.6.2",
