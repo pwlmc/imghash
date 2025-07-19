@@ -1,5 +1,6 @@
-# imghash ![build](https://github.com/pwlmaciejewski/imghash/workflows/Node.js%20CI/badge.svg) ![npm](https://img.shields.io/npm/v/imghash) ![Libraries.io dependency status for GitHub repo](https://img.shields.io/librariesio/github/pwlmaciejewski/imghash) ![NPM](https://img.shields.io/npm/l/imghash) 
-Promise-based image perceptual hash calculation for node.
+# imghash ![Version](https://img.shields.io/npm/v/imghash) ![License](https://img.shields.io/npm/l/imghash)
+
+Promise-based image perceptual hash calculation for Node.js
 
 ## Installation
 
@@ -15,16 +16,16 @@ npm install imghash
 const imghash = require("imghash");
 
 const hash1 = await imghash.hash("./path/to/file");
-console.log(hash1);  // "f884c4d8d1193c07"
+console.log(hash1); // "f884c4d8d1193c07"
 
 // Custom hex length and result in binary
 const hash2 = await imghash.hash("./path/to/file", 4, "binary");
-console.log(hash2);  // "1000100010000010"
+console.log(hash2); // "1000100010000010"
 ```
 
 ## Finding similar images
 
-To measure similarity between images you can use [Hamming distance](https://en.wikipedia.org/wiki/Hamming_distance) or [Levenshtein Distance](https://en.wikipedia.org/wiki/Levenshtein_distance). 
+To measure similarity between images you can use [Hamming distance](https://en.wikipedia.org/wiki/Hamming_distance) or [Levenshtein Distance](https://en.wikipedia.org/wiki/Levenshtein_distance).
 
 The following example uses the latter one:
 
@@ -52,9 +53,9 @@ Returns: ES6 `Promise`, resolved returns hash string in specified format and len
 
 Parameters:
 
-* `filepath` - path to the image (supported formats are `png` and `jpeg`) or `Buffer`
-* `bits` (optional) - hash length [default: `8`]
-* `format` (optional) - output format [default: `hex`]
+- `filepath` - path to the image (supported formats are `png` and `jpeg`) or `Buffer`
+- `bits` (optional) - hash length [default: `8`]
+- `format` (optional) - output format [default: `hex`]
 
 ---
 
@@ -64,8 +65,8 @@ Returns: hex hash
 
 Parameters:
 
-* `data` - image data descriptor in form `{ width: [width], height: [height], data: [decoded image pixels] }`
-* `bits` - hash length
+- `data` - image data descriptor in form `{ width: [width], height: [height], data: [decoded image pixels] }`
+- `bits` - hash length
 
 ---
 
@@ -75,7 +76,7 @@ Returns: hex string, eg. `f884c4d8d1193c07`.
 
 Parameters:
 
-* `s` - binary hash string eg. `1000100010000010`
+- `s` - binary hash string eg. `1000100010000010`
 
 ---
 
@@ -85,11 +86,11 @@ Returns: hex string, eg. `1000100010000010`.
 
 Parameters:
 
-* `s` - hex hash string eg. `f884c4d8d1193c07`
+- `s` - hex hash string eg. `f884c4d8d1193c07`
 
 ## Further reading
 
 `imghash` takes advantage of block mean value based hashing method:
 
-* [http://stackoverflow.com/questions/14377854/block-mean-value-hashing-method](http://stackoverflow.com/questions/14377854/block-mean-value-hashing-method)
-* [http://commonsmachinery.se/2014/09/digital-image-matching-part-1-hashing/](http://commonsmachinery.se/2014/09/digital-image-matching-part-1-hashing/)
+- [http://stackoverflow.com/questions/14377854/block-mean-value-hashing-method](http://stackoverflow.com/questions/14377854/block-mean-value-hashing-method)
+- [http://commonsmachinery.se/2014/09/digital-image-matching-part-1-hashing/](http://commonsmachinery.se/2014/09/digital-image-matching-part-1-hashing/)
