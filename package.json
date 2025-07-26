@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint index.js test/index.spec.js",
-    "test": "npm run lint && jest"
+    "test": "npm run lint && jest",
+    "typecheck": "tsc --noEmit",
+    "build": "tsup src/index.ts --format cjs --dts",
+    "dev": "tsup src/index.ts --format cjs --watch"
   },
   "repository": {
     "type": "git",
@@ -30,10 +33,12 @@
   "devDependencies": {
     "eslint": "^9.31.0",
     "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.1",
     "jest": "^30.0.4",
     "leven": "^3.1.0",
     "prettier": "^3.6.2",
-    "eslint-plugin-prettier": "^5.5.1"
+    "tsup": "^8.5.0",
+    "typescript": "^5.8.3"
   },
   "dependencies": {
     "@canvas/image": "^2.0.0",
