@@ -31,6 +31,7 @@
   },
   "homepage": "https://github.com/pwlmc/imghash#readme",
   "devDependencies": {
+    "@types/node": "^24.1.0",
     "eslint": "^9.31.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.1",

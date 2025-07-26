@@ -1,12 +1,55 @@
-"use strict";
-
-const fs = require("fs");
-const blockhash = require("blockhash-core");
-const { imageFromBuffer, getImageData } = require("@canvas/image");
-const imageType = require("image-type");
-const jpeg = require("jpeg-js");
+import fs from "fs";
+import blockhash from "blockhash-core";
+import { imageFromBuffer, getImageData } from "@canvas/image";
+import imageType from "image-type";
+import jpeg from "jpeg-js";
+import { ImageData } from "blockhash-core";
 
 const JPEG_MAX_MEMORY_USAGE_MB = 1024;
+
+const HEX_BINARY_LOOKUP = {
+  0: "0000",
+  1: "0001",
+  2: "0010",
+  3: "0011",
+  4: "0100",
+  5: "0101",
+  6: "0110",
+  7: "0111",
+  8: "1000",
+  9: "1001",
+  a: "1010",
+  b: "1011",
+  c: "1100",
+  d: "1101",
+  e: "1110",
+  f: "1111",
+  A: "1010",
+  B: "1011",
+  C: "1100",
+  D: "1101",
+  E: "1110",
+  F: "1111",
+} as const;
+
+const BINARY_TO_HEX_LOOKUP = {
+  "0000": "0",
+  "0001": "1",
+  "0010": "2",
+  "0011": "3",
+  "0100": "4",
+  "0101": "5",
+  "0110": "6",
+  "0111": "7",
+  1000: "8",
+  1001: "9",
+  1010: "a",
+  1011: "b",
+  1100: "c",
+  1101: "d",
+  1110: "e",
+  1111: "f",
+} as const;
 
 async function hash(filepath: string, bits: number, format: string) {
   format = format || "hex";
@@ -19,7 +62,7 @@ async function hash(filepath: string, bits: number, format: string) {
     throw new Error(`Invalid bit-length: ${bits}`);
   }
 
-  const fileData = await new Promise((resolve, reject) => {
+  const fileData: Buffer = await new Promise((resolve, reject) => {
     if (Buffer.isBuffer(filepath)) {
       return resolve(filepath);
     }
@@ -35,7 +78,7 @@ async function hash(filepath: string, bits: number, format: string) {
     const image = await imageFromBuffer(fileData);
     imageData = getImageData(image);
   } catch (error) {
-    if (imageType(fileData).mime === "image/jpeg") {
+    if (imageType(fileData)!.mime === "image/jpeg") {
       imageData = jpeg.decode(fileData, {
         maxMemoryUsageInMB: JPEG_MAX_MEMORY_USAGE_MB,
       });
@@ -44,72 +87,34 @@ async function hash(filepath: string, bits: number, format: string) {
     }
   }
 
-  const hexHash = hashRaw(imageData, bits);
+  const hexHash = hashRaw(imageData!, bits);
   if (format === "binary") {
     return hexToBinary(hexHash);
   }
   return hexHash;
 }
 
-function hashRaw(data, bits) {
+function hashRaw(data: ImageData, bits: number) {
   return blockhash.bmvbhash(data, bits);
 }
 
-function hexToBinary(s) {
-  const lookup = {
-    0: "0000",
-    1: "0001",
-    2: "0010",
-    3: "0011",
-    4: "0100",
-    5: "0101",
-    6: "0110",
-    7: "0111",
-    8: "1000",
-    9: "1001",
-    a: "1010",
-    b: "1011",
-    c: "1100",
-    d: "1101",
-    e: "1110",
-    f: "1111",
-    A: "1010",
-    B: "1011",
-    C: "1100",
-    D: "1101",
-    E: "1110",
-    F: "1111",
-  };
+function hexToBinary(s: string): string {
   let ret = "";
   for (let i = 0; i < s.length; i++) {
-    ret += lookup[s[i]];
+    if (HEX_BINARY_LOOKUP.hasOwnProperty(s[i]!)) {
+      ret += HEX_BINARY_LOOKUP[s[i]! as keyof typeof HEX_BINARY_LOOKUP];
+    }
   }
   return ret;
 }
 
-function binaryToHex(s) {
-  const lookup = {
-    "0000": "0",
-    "0001": "1",
-    "0010": "2",
-    "0011": "3",
-    "0100": "4",
-    "0101": "5",
-    "0110": "6",
-    "0111": "7",
-    1000: "8",
-    1001: "9",
-    1010: "a",
-    1011: "b",
-    1100: "c",
-    1101: "d",
-    1110: "e",
-    1111: "f",
-  };
+function binaryToHex(s: string): string {
   let ret = "";
   for (let i = 0; i < s.length; i += 4) {
     let chunk = s.slice(i, i + 4);
-    ret += lookup[chunk];
+    if (BINARY_TO_HEX_LOOKUP.hasOwnProperty(chunk)) {
+      ret += BINARY_TO_HEX_LOOKUP[chunk as keyof typeof BINARY_TO_HEX_LOOKUP];
+    }
   }
   return ret;
 }
