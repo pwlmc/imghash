@@ -2,7 +2,6 @@
   "name": "imghash",
   "version": "1.0.1",
   "description": "Image perceptual hash calculation for node",
-  "main": "index.js",
   "scripts": {
     "lint": "eslint src",
     "typecheck": "tsc --noEmit",
@@ -30,6 +29,20 @@
     "node": ">=20"
   },
   "homepage": "https://github.com/pwlmc/imghash#readme",
+  "main": "dist/index.js",       
+  "types": "dist/index.d.ts",    
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "type": "commonjs",             
+  "files": [
+    "dist",                       
+    "README.md",
+    "LICENSE"
+  ],
   "devDependencies": {
     "@types/node": "^24.1.0",
     "eslint": "^9.31.0",
