@@ -51,7 +51,7 @@ const BINARY_TO_HEX_LOOKUP = {
   1111: "f",
 } as const;
 
-async function hash(filepath: string, bits: number, format: string) {
+async function hash(filepath: string, bits?: number | null, format?: string) {
   format = format || "hex";
   if (format !== "hex" && format !== "binary") {
     throw new Error(`Unsupported format: ${format}`);
@@ -119,7 +119,7 @@ function binaryToHex(s: string): string {
   return ret;
 }
 
-module.exports = {
+export default {
   hash,
   hashRaw,
   hexToBinary,
