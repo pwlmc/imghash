@@ -101,7 +101,7 @@ function hashRaw(data: ImageData, bits: number) {
 function hexToBinary(s: string): string {
   let ret = "";
   for (let i = 0; i < s.length; i++) {
-    if (HEX_BINARY_LOOKUP.hasOwnProperty(s[i]!)) {
+    if (Object.prototype.hasOwnProperty.call(HEX_BINARY_LOOKUP, s[i]!)) {
       ret += HEX_BINARY_LOOKUP[s[i]! as keyof typeof HEX_BINARY_LOOKUP];
     }
   }
@@ -111,8 +111,8 @@ function hexToBinary(s: string): string {
 function binaryToHex(s: string): string {
   let ret = "";
   for (let i = 0; i < s.length; i += 4) {
-    let chunk = s.slice(i, i + 4);
-    if (BINARY_TO_HEX_LOOKUP.hasOwnProperty(chunk)) {
+    const chunk = s.slice(i, i + 4);
+    if (Object.prototype.hasOwnProperty.call(BINARY_TO_HEX_LOOKUP, chunk)) {
       ret += BINARY_TO_HEX_LOOKUP[chunk as keyof typeof BINARY_TO_HEX_LOOKUP];
     }
   }

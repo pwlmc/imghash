@@ -29,22 +29,24 @@
     "node": ">=20"
   },
   "homepage": "https://github.com/pwlmc/imghash#readme",
-  "main": "dist/index.js",       
-  "types": "dist/index.d.ts",    
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "require": "./dist/index.js",
       "types": "./dist/index.d.ts"
     }
   },
-  "type": "commonjs",             
+  "type": "commonjs",
   "files": [
-    "dist",                       
+    "dist",
     "README.md",
     "LICENSE"
   ],
   "devDependencies": {
     "@types/node": "^24.1.0",
+    "@typescript-eslint/eslint-plugin": "^8.38.0",
+    "@typescript-eslint/parser": "^8.38.0",
     "eslint": "^9.31.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.1",
@@ -52,6 +54,7 @@
     "prettier": "^3.6.2",
     "tsup": "^8.5.0",
     "typescript": "^5.8.3",
+    "typescript-eslint": "^8.38.0",
     "vite": "^7.0.6",
     "vitest": "^3.2.4"
   },
