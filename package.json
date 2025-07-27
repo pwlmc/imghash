@@ -6,7 +6,7 @@
     "lint": "eslint src",
     "typecheck": "tsc --noEmit",
     "test": "vitest",
-    "build": "tsup src/index.ts --format cjs --dts",
+    "build": "tsup src/index.ts --format=cjs,esm --dts --cjsInterop",
     "dev": "tsup src/index.ts --format cjs --watch"
   },
   "repository": {
@@ -29,12 +29,14 @@
     "node": ">=20"
   },
   "homepage": "https://github.com/pwlmc/imghash#readme",
-  "main": "dist/index.js",
+  "main": "dist/index.js", 
+  "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
-      "require": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",   
+      "require": "./dist/index.js" 
     }
   },
   "type": "commonjs",

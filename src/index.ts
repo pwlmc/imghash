@@ -119,9 +119,12 @@ function binaryToHex(s: string): string {
   return ret;
 }
 
-export default {
+const api = {
   hash,
   hashRaw,
   hexToBinary,
   binaryToHex,
 };
+
+// @ts-expect-error: we don't want to introduce backward incompatible changes yet
+export = api;
