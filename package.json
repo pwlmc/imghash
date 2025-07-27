@@ -6,6 +6,7 @@
     "lint": "eslint src",
     "typecheck": "tsc --noEmit",
     "test": "vitest",
+    "e2e": "bats e2e/*.bats",
     "build": "tsup src/index.ts --format=cjs,esm --dts --cjsInterop",
     "dev": "tsup src/index.ts --format cjs --watch"
   },
@@ -29,14 +30,14 @@
     "node": ">=20"
   },
   "homepage": "https://github.com/pwlmc/imghash#readme",
-  "main": "dist/index.js", 
+  "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",   
-      "require": "./dist/index.js" 
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
     }
   },
   "type": "commonjs",
@@ -49,6 +50,9 @@
     "@types/node": "^24.1.0",
     "@typescript-eslint/eslint-plugin": "^8.38.0",
     "@typescript-eslint/parser": "^8.38.0",
+    "bats": "^1.12.0",
+    "bats-assert": "^2.0.0",
+    "bats-support": "^0.2.0",
     "eslint": "^9.31.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.1",
