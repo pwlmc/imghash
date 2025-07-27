@@ -26,6 +26,18 @@ jobs:
       - run: npm ci
       - run: npm run typecheck
 
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: npm ci
+      - run: npm run build
+      - run: npm run e2e
+
   build:
     runs-on: ubuntu-latest
     steps:
