@@ -6,6 +6,9 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/imghash
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js 20.x
@@ -17,6 +20,9 @@ jobs:
 
   typecheck:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/imghash
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js 20.x
@@ -28,6 +34,9 @@ jobs:
 
   e2e:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/imghash
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js 20.x
@@ -40,6 +49,9 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/imghash
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js 20.x
@@ -51,6 +63,9 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/imghash
     strategy:
       matrix:
         node-version: [20.x, 22.x, 24.x]
