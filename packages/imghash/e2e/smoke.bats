@@ -1,7 +1,7 @@
 #!/usr/bin/env bats
 
-load '../node_modules/bats-support/load'
-load '../node_modules/bats-assert/load'
+load '../../../node_modules/bats-support/load'
+load '../../../node_modules/bats-assert/load'
 
 @test "Common JS smoke test" {
     run node ./e2e/smoke.cjs
