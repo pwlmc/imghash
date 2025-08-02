@@ -66,7 +66,7 @@
   "dependencies": {
     "@canvas/image": "^2.0.0",
     "blockhash-core": "^0.1.0",
-    "image-type": "^4.1.0",
+    "image-type": "^6.0.0",
     "jpeg-js": "^0.4.1"
   }
 }
