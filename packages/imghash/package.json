@@ -49,7 +49,7 @@
   "devDependencies": {
     "@types/node": "^24.2.1",
     "@typescript-eslint/eslint-plugin": "^8.39.1",
-    "@typescript-eslint/parser": "^8.39.0",
+    "@typescript-eslint/parser": "^8.39.1",
     "bats": "^1.12.0",
     "bats-assert": "^2.0.0",
     "bats-support": "^0.3.0",
