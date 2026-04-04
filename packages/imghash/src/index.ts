@@ -1,9 +1,8 @@
-import fs from "fs";
-import blockhash from "blockhash-core";
-import { imageFromBuffer, getImageData } from "@canvas/image";
+import fs from "node:fs";
+import { getImageData, imageFromBuffer } from "@canvas/image";
+import blockhash, { type ImageData } from "blockhash-core";
 import imageType from "image-type";
 import jpeg from "jpeg-js";
-import { ImageData } from "blockhash-core";
 
 const JPEG_MAX_MEMORY_USAGE_MB = 1024;
 
@@ -77,12 +76,12 @@ async function hash(
     });
   });
 
-  let imageData;
+  let imageData: ImageData | undefined;
   try {
     const image = await imageFromBuffer(fileData);
     imageData = getImageData(image);
   } catch (error) {
-    if (imageType(fileData)!.mime === "image/jpeg") {
+    if (imageType(fileData)?.mime === "image/jpeg") {
       imageData = jpeg.decode(fileData, {
         maxMemoryUsageInMB: JPEG_MAX_MEMORY_USAGE_MB,
       });
@@ -91,6 +90,7 @@ async function hash(
     }
   }
 
+  // biome-ignore lint/style/noNonNullAssertion: to be fixed
   const hexHash = hashRaw(imageData!, bits);
   if (format === "binary") {
     return hexToBinary(hexHash);
@@ -105,7 +105,9 @@ function hashRaw(data: ImageData, bits: number) {
 function hexToBinary(s: string): string {
   let ret = "";
   for (let i = 0; i < s.length; i++) {
-    if (Object.prototype.hasOwnProperty.call(HEX_BINARY_LOOKUP, s[i]!)) {
+    // biome-ignore lint/style/noNonNullAssertion: to be fixed
+    if (Object.hasOwn(HEX_BINARY_LOOKUP, s[i]!)) {
+      // biome-ignore lint/style/noNonNullAssertion: to be fixed
       ret += HEX_BINARY_LOOKUP[s[i]! as keyof typeof HEX_BINARY_LOOKUP];
     }
   }
@@ -116,7 +118,7 @@ function binaryToHex(s: string): string {
   let ret = "";
   for (let i = 0; i < s.length; i += 4) {
     const chunk = s.slice(i, i + 4);
-    if (Object.prototype.hasOwnProperty.call(BINARY_TO_HEX_LOOKUP, chunk)) {
+    if (Object.hasOwn(BINARY_TO_HEX_LOOKUP, chunk)) {
       ret += BINARY_TO_HEX_LOOKUP[chunk as keyof typeof BINARY_TO_HEX_LOOKUP];
     }
   }

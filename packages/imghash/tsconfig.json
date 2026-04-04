@@ -4,6 +4,7 @@
     "module": "ESNext",
     "moduleResolution": "Node",
     "strict": true,
+    "lib": ["es2022"],
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "declaration": true,
