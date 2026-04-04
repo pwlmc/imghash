@@ -1,41 +1,41 @@
+import fs from "node:fs";
 import leven from "leven";
-import fs from "fs";
+import { describe, expect, it } from "vitest";
 import imghash from "./index";
-import { describe, it, expect } from "vitest";
 
 describe("imghash", () => {
   it.each([
     ["jpeg", "../../../assets/absolut1"],
     ["png", "../../../assets/castle1.png"],
     ["bmp", "../../../assets/castle1.bmp"],
-  ])("should create hash for %s", async (fileType, filePath) => {
-    const hash = await imghash.hash(__dirname + "/" + filePath);
+  ])("should create hash for %s", async (_fileType, filePath) => {
+    const hash = await imghash.hash(`${__dirname}/${filePath}`);
     expect(hash).toBeDefined();
   });
 
   it("should create close hashes for the same image but in a different format", async () => {
-    const h1 = await imghash.hash(__dirname + "/../../../assets/castle1.png");
-    const h2 = await imghash.hash(__dirname + "/../../../assets/castle1.bmp");
+    const h1 = await imghash.hash(`${__dirname}/../../../assets/castle1.png`);
+    const h2 = await imghash.hash(`${__dirname}/../../../assets/castle1.bmp`);
     const dist = leven(h1, h2);
     expect(dist).toBeLessThan(12);
   });
 
   it("should create same hashes the same images", async () => {
-    const h1 = await imghash.hash(__dirname + "/../../../assets/castle1.png");
-    const h2 = await imghash.hash(__dirname + "/../../../assets/castle2.png");
+    const h1 = await imghash.hash(`${__dirname}/../../../assets/castle1.png`);
+    const h2 = await imghash.hash(`${__dirname}/../../../assets/castle2.png`);
     expect(h1).toBe(h2);
   });
 
   it("should create different hashes different images", async () => {
-    const h1 = await imghash.hash(__dirname + "/../../../assets/castle1.png");
-    const h2 = await imghash.hash(__dirname + "/../../../assets/absolut1");
+    const h1 = await imghash.hash(`${__dirname}/../../../assets/castle1.png`);
+    const h2 = await imghash.hash(`${__dirname}/../../../assets/absolut1`);
     const dist = leven(h1, h2);
     expect(dist).toBeGreaterThan(12);
   });
 
   it("should create close hashes similar images", async () => {
-    const h1 = await imghash.hash(__dirname + "/../../../assets/absolut2");
-    const h2 = await imghash.hash(__dirname + "/../../../assets/absolut1");
+    const h1 = await imghash.hash(`${__dirname}/../../../assets/absolut2`);
+    const h2 = await imghash.hash(`${__dirname}/../../../assets/absolut1`);
     const dist = leven(h1, h2);
     expect(dist).not.toBe(0);
     expect(dist).toBeLessThan(14);
@@ -43,12 +43,12 @@ describe("imghash", () => {
 
   it("should support binary output", async () => {
     const h1 = imghash.hash(
-      __dirname + "/../../../assets/absolut1",
+      `${__dirname}/../../../assets/absolut1`,
       null,
       "hex",
     );
     const h2 = imghash.hash(
-      __dirname + "/../../../assets/absolut1",
+      `${__dirname}/../../../assets/absolut1`,
       null,
       "binary",
     );
@@ -64,7 +64,7 @@ describe("imghash", () => {
    */
   it("should hash palette based pngs correctly", async () => {
     const h1 = await imghash.hash(
-      __dirname + "/../../../assets/Arius.png",
+      `${__dirname}/../../../assets/Arius.png`,
       16,
       "hex",
     );
@@ -82,11 +82,11 @@ describe("imghash", () => {
    */
   it("should not throw longjmp error", async () => {
     const h1 = await imghash.hash(
-      __dirname + "/../../../assets/longjmperror.jpg",
+      `${__dirname}/../../../assets/longjmperror.jpg`,
       8,
     );
     const h2 = await imghash.hash(
-      __dirname + "/../../../assets/longjmperror.jpg",
+      `${__dirname}/../../../assets/longjmperror.jpg`,
       16,
     );
     expect(h1).toHaveLength(16);
@@ -95,21 +95,20 @@ describe("imghash", () => {
 
   it("should support validate output format", () => {
     return expect(
-      imghash.hash(__dirname + "/../../../assets/absolut1", null, "foo"),
+      imghash.hash(`${__dirname}/../../../assets/absolut1`, null, "foo"),
     ).rejects.toEqual(new Error("Unsupported format: foo"));
   });
 
   it("should support variable bits length", async () => {
-    const h1 = await imghash.hash(__dirname + "/../../../assets/absolut1", 8);
-    const h2 = await imghash.hash(__dirname + "/../../../assets/absolut1", 16);
+    const h1 = await imghash.hash(`${__dirname}/../../../assets/absolut1`, 8);
+    const h2 = await imghash.hash(`${__dirname}/../../../assets/absolut1`, 16);
     expect(h1.length * 4).toBe(h2.length);
   });
 
-  it("should validate bit lengths", function () {
-    return expect(
-      imghash.hash(__dirname + "/../../../assets/absolut1", 10),
-    ).rejects.toEqual(new Error("Invalid bit-length: 10"));
-  });
+  it("should validate bit lengths", () =>
+    expect(
+      imghash.hash(`${__dirname}/../../../assets/absolut1`, 10),
+    ).rejects.toEqual(new Error("Invalid bit-length: 10")));
 
   it("should expose hexToBinary", () => {
     expect(imghash.hexToBinary("83C3D381C38985A5")).toBe(
@@ -126,7 +125,7 @@ describe("imghash", () => {
   });
 
   it("should accept Buffer input", async () => {
-    const buffer = fs.readFileSync(__dirname + "/../../../assets/absolut1");
+    const buffer = fs.readFileSync(`${__dirname}/../../../assets/absolut1`);
     const hash = await imghash.hash(buffer);
     expect(hash).not.toBeNull();
   });
