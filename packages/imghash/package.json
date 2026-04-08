@@ -1,6 +1,6 @@
 {
   "name": "imghash",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "Image perceptual hash calculation for node",
   "scripts": {
     "lint": "biome check src",
