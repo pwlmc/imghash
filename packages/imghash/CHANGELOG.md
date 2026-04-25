@@ -4,6 +4,11 @@
 
 TBA
 
+## v1.1.4 (2026-04-25)
+
+- Upgrade TypeScript to v6
+- Bump vitest, bats, bats-assert
+
 ## v1.1.3 (2026-04-08)
 
 - Replace tsup with tsdown as the build tool
