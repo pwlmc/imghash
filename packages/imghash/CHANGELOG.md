@@ -4,6 +4,10 @@
 
 TBA
 
+## v1.1.5 (2026-10-14)
+
+- Bump vitest to v5
+
 ## v1.1.4 (2026-04-25)
 
 - Upgrade TypeScript to v6
