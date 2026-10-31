@@ -90,7 +90,6 @@ async function hash(
     }
   }
 
-  // biome-ignore lint/style/noNonNullAssertion: to be fixed
   const hexHash = hashRaw(imageData!, bits);
   if (format === "binary") {
     return hexToBinary(hexHash);
@@ -105,9 +104,7 @@ function hashRaw(data: ImageData, bits: number) {
 function hexToBinary(s: string): string {
   let ret = "";
   for (let i = 0; i < s.length; i++) {
-    // biome-ignore lint/style/noNonNullAssertion: to be fixed
     if (Object.hasOwn(HEX_BINARY_LOOKUP, s[i]!)) {
-      // biome-ignore lint/style/noNonNullAssertion: to be fixed
       ret += HEX_BINARY_LOOKUP[s[i]! as keyof typeof HEX_BINARY_LOOKUP];
     }
   }
