@@ -1,12 +1,7 @@
 {
   "dependencies": {
-    "@commitlint/cli": "^9.1.2",
-    "@commitlint/config-conventional": "^9.1.2",
-    "husky": "^4.2.5",
+    "imghash": "^1.1.5",
     "yargs": "^15.1.0"
-  },
-  "peerDependencies": {
-    "imghash": "^1.0.0"
   },
   "name": "imghash-cli",
   "version": "0.0.1",
@@ -16,22 +11,15 @@
   "author": "Paweł Maciejewski <1276139+pwlmaciejewski@users.noreply.github.com>",
   "license": "MIT",
   "devDependencies": {
-    "eslint": "^7.7.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-prettier": "^3.1.4",
-    "prettier": "^2.0.5"
+    "oxlint": "^1.90.0"
   },
   "scripts": {
-    "lint": "eslint index.js",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
     "test": "npm run lint"
   },
   "bin": {
     "imghash": "./index.js"
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
   },
   "keywords": [
     "perceptual",

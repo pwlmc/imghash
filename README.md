@@ -68,5 +68,5 @@ See the full [API Reference](./packages/imghash/README.md#api-reference).
 
 ## Read more
 
-- [Command-Line Interface](https://github.com/pwlmaciejewski/imghash-cli)
+- [Command-Line Interface](./packages/imghash-cli)
 - [Block mean value hashing method](https://stackoverflow.com/questions/14377854/block-mean-value-hashing-method)
