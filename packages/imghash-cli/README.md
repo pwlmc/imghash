@@ -1,5 +1,6 @@
-# imghash-cli ![build](https://github.com/pwlmaciejewski/imghash-cli/workflows/Node.js%20CI/badge.svg) ![npm](https://img.shields.io/npm/v/imghash-cli) ![NPM](https://img.shields.io/npm/l/imghash-cli)
-[imghash](https://github.com/pwlmaciejewski/imghash) command-line interface
+# imghash-cli ![Version](https://img.shields.io/npm/v/imghash-cli) ![License](https://img.shields.io/npm/l/imghash-cli)
+
+Command-line interface for [imghash](https://github.com/pwlmaciejewski/imghash).
 
 ## Installation
 
