@@ -4,7 +4,7 @@
     "yargs": "^15.1.0"
   },
   "name": "imghash-cli",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "imghash command-line interface",
   "main": "index.js",
   "repository": "git@github.com:pwlmaciejewski/imghash-cli.git",
