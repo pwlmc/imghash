@@ -5,7 +5,7 @@ Command-line interface for [imghash](https://github.com/pwlmaciejewski/imghash).
 ## Installation
 
 ```sh
-npm i -g imghash-cli imghash
+npm i -g imghash-cli 
 ```
 
 ## Usage
