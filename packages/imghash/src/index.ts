@@ -50,7 +50,7 @@ const BINARY_TO_HEX_LOOKUP = {
   1111: "f",
 } as const;
 
-async function hash(
+export async function hashFile(
   filepath: string | Buffer,
   bits?: number | null,
   format?: string,
@@ -97,11 +97,11 @@ async function hash(
   return hexHash;
 }
 
-function hashRaw(data: ImageData, bits: number) {
+export function hashRaw(data: ImageData, bits: number) {
   return blockhash.bmvbhash(data, bits);
 }
 
-function hexToBinary(s: string): string {
+export function hexToBinary(s: string): string {
   let ret = "";
   for (let i = 0; i < s.length; i++) {
     if (Object.hasOwn(HEX_BINARY_LOOKUP, s[i]!)) {
@@ -111,7 +111,7 @@ function hexToBinary(s: string): string {
   return ret;
 }
 
-function binaryToHex(s: string): string {
+export function binaryToHex(s: string): string {
   let ret = "";
   for (let i = 0; i < s.length; i += 4) {
     const chunk = s.slice(i, i + 4);
@@ -121,13 +121,3 @@ function binaryToHex(s: string): string {
   }
   return ret;
 }
-
-const api = {
-  hash,
-  hashRaw,
-  hexToBinary,
-  binaryToHex,
-};
-
-// @ts-expect-error: we don't want to introduce backward incompatible changes yet
-export = api;

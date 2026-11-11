@@ -1,6 +1,6 @@
 {
   "name": "imghash",
-  "version": "1.1.5",
+  "version": "2.0.0",
   "description": "Image perceptual hash calculation for node",
   "scripts": {
     "lint": "oxlint src",
@@ -31,22 +31,14 @@
     "node": ">=22"
   },
   "homepage": "https://github.com/pwlmc/imghash#readme",
-  "main": "dist/index.cjs",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.cts",
+  "type": "module",
+  "types": "dist/index.d.mts",
   "exports": {
     ".": {
-      "import": {
-        "types": "./dist/index.d.mts",
-        "default": "./dist/index.mjs"
-      },
-      "require": {
-        "types": "./dist/index.d.cts",
-        "default": "./dist/index.cjs"
-      }
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
     }
   },
-  "type": "commonjs",
   "files": [
     "dist",
     "README.md",

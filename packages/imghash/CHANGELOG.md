@@ -2,6 +2,12 @@
 
 ## [Next]
 
+### Breaking changes
+
+- **Breaking:** Require Node.js 22 or newer.
+- **Breaking:** Convert the package to ESM-only. CommonJS `require()` is no longer supported; the published runtime entry is `dist/index.mjs` and the TypeScript declarations are `dist/index.d.mts`.
+- **Breaking:** Replace the default `hash()` API with the named `hashFile()` export. The public API is now `hashFile`, `hashRaw`, `hexToBinary`, and `binaryToHex`.
+
 TBA
 
 ## v1.1.5 (2026-10-14)
