@@ -11,13 +11,13 @@ npm install imghash
 ## Basic usage
 
 ```js
-import imghash from "imghash";
+import { hashFile } from "imghash";
 
-const hash1 = await imghash.hash("./path/to/file");
+const hash1 = await hashFile("./path/to/file");
 console.log(hash1); // "f884c4d8d1193c07"
 
 // Use a 4-bit hash grid and return the result as binary
-const hash2 = await imghash.hash("./path/to/file", 4, "binary");
+const hash2 = await hashFile("./path/to/file", 4, "binary");
 console.log(hash2); // "1000100010000010"
 ```
 
@@ -28,11 +28,11 @@ To measure similarity between images you can use [Hamming distance](https://en.w
 The following example uses the latter one:
 
 ```js
-import imghash from "imghash";
+import { hashFile } from "imghash";
 import leven from "leven";
 
-const hash1 = await imghash.hash("./img1");
-const hash2 = await imghash.hash("./img2");
+const hash1 = await hashFile("./img1");
+const hash2 = await hashFile("./img2");
 
 const distance = leven(hash1, hash2);
 console.log(`Distance between images is: ${distance}`);
@@ -47,22 +47,6 @@ The threshold of `12` is a starting point, not a universal rule. Tune it for
 your image set and the hash size you use.
 
 ## API
-
-#### `hash(filepath, bits?, format?)`
-
-Calculates a perceptual hash for an image.
-
-```js
-const hash = await imghash.hash("./image.png", 8, "hex");
-```
-
-| Parameter  | Type                | Default | Description                               |
-| ---------- | ------------------- | ------- | ----------------------------------------- |
-| `filepath` | `string \| Buffer`  | —       | Image path or image data.                 |
-| `bits`     | `number`            | `8`     | Hash grid size. Must be divisible by `4`. |
-| `format`   | `"hex" \| "binary"` | `"hex"` | Returned hash encoding.                   |
-
-Returns: `Promise<string>`.
 
 See the full [API Reference](./packages/imghash/README.md#api-reference).
 

@@ -1,7 +1,10 @@
 #!/usr/bin/env node
 
-const imghash = require("imghash");
-const argv = require("yargs")
+import { hashFile } from "imghash";
+import yargs from "yargs";
+import { hideBin } from "yargs/helpers";
+const argv = yargs(process.argv)
+  .scriptName("imghash")
   .usage(
     "$0 [-b BITS] [-f FORMAT] <file-path>",
     "generates image hash",
@@ -11,7 +14,7 @@ const argv = require("yargs")
         type: "string",
         required: true,
       });
-    }
+    },
   )
   .option("b", {
     alias: "bits",
@@ -23,6 +26,7 @@ const argv = require("yargs")
     describe: "output format",
     type: "string",
     choices: ["hex", "binary"],
-  }).argv;
+  })
+  .parse(hideBin(process.argv));
 
-imghash.hash(argv.filePath, argv.bits, argv.format).then(console.log);
+hashFile(argv.filePath, argv.bits, argv.format).then(console.log);

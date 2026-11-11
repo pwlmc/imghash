@@ -11,13 +11,13 @@ npm install imghash
 ## Basic usage
 
 ```js
-import imghash from "imghash";
+import { hashFile } from "imghash";
 
-const hash1 = await imghash.hash("./path/to/file");
+const hash1 = await hashFile("./path/to/file");
 console.log(hash1); // "f884c4d8d1193c07"
 
 // Custom hex length and result in binary
-const hash2 = await imghash.hash("./path/to/file", 4, "binary");
+const hash2 = await hashFile("./path/to/file", 4, "binary");
 console.log(hash2); // "1000100010000010"
 ```
 
@@ -28,11 +28,11 @@ To measure similarity between images you can use [Hamming distance](https://en.w
 The following example uses the latter one:
 
 ```js
-import imghash from "imghash";
+import { hashFile } from "imghash";
 import leven from "leven";
 
-const hash1 = await imghash.hash("./img1");
-const hash2 = await imghash.hash("./img2");
+const hash1 = await hashFile("./img1");
+const hash2 = await hashFile("./img2");
 
 const distance = leven(hash1, hash2);
 console.log(`Distance between images is: ${distance}`);
@@ -45,19 +45,20 @@ if (distance <= 12) {
 
 ## API Reference
 
-| Method                           | Description                                       |
-| -------------------------------- | ------------------------------------------------- |
-| `hash(filepath, bits?, format?)` | Calculate an image perceptual hash.               |
-| `hashRaw(data, bits)`            | Calculate a hash from already-decoded image data. |
-| `hexToBinary(value)`             | Convert a hexadecimal hash to binary.             |
-| `binaryToHex(value)`             | Convert a binary hash to hexadecimal.             |
+| Method                               | Description                                       |
+| ------------------------------------ | ------------------------------------------------- |
+| `hashFile(filepath, bits?, format?)` | Calculate an image perceptual hash.               |
+| `hashRaw(data, bits)`                | Calculate a hash from already-decoded image data. |
+| `hexToBinary(value)`                 | Convert a hexadecimal hash to binary.             |
+| `binaryToHex(value)`                 | Convert a binary hash to hexadecimal.             |
 
-#### `hash(filepath, bits?, format?)`
+#### `hashFile(filepath, bits?, format?)`
 
 Calculates a perceptual hash for an image.
 
 ```js
-const hash = await imghash.hash("./image.png", 8, "hex");
+import { hashFile } from "imghash";
+const hash = await hashFile("./image.png", 8, "hex");
 ```
 
 | Parameter  | Type                | Default | Description                               |
@@ -84,8 +85,9 @@ Returns: `string`.
 ### Conversion helpers
 
 ```js
-imghash.hexToBinary("f8"); // "11111000"
-imghash.binaryToHex("11111000"); // "f8"
+import { hexToBinary, binaryToHex } from "imghash";
+hexToBinary("f8"); // "11111000"
+binaryToHex("11111000"); // "f8"
 ```
 
 ## Further reading
